@@ -9,8 +9,8 @@ const NotFound = require('../errors/NotFound');
 
 router.use('/api/', signInRouter);
 router.use('/api/', signUpRouter);
-router.use('/users', userRouter);
-router.use('/cards', cardRouter);
+router.use('/api/users', userRouter);
+router.use('/api/cards', cardRouter);
 router.use((req, res, next) => {
   next(new NotFound('NOT FOUND'));
 });
