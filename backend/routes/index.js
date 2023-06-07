@@ -7,8 +7,8 @@ const signUpRouter = require('./signUp');
 
 const NotFound = require('../errors/NotFound');
 
-router.use('/', signInRouter);
-router.use('/', signUpRouter);
+router.use('/api/', signInRouter);
+router.use('/api/', signUpRouter);
 router.use('/users', userRouter);
 router.use('/cards', cardRouter);
 router.use((req, res, next) => {
