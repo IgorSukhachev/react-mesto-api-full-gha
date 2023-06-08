@@ -99,6 +99,8 @@ const login = (req, res, next) => {
               .cookie('jwt', token, {
                 maxAge: lifetime,
                 httpOnly: true,
+                sameSite: 'None',
+                secure: true,
               })
               .send(user.toJSON());
           } else {
