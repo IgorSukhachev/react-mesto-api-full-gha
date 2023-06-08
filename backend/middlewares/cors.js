@@ -2,7 +2,7 @@
 const allowedCors = [
   'https://mesto-suhachov.nomoredomains.rocks',
   'http://mesto-suhachov.nomoredomains.rocks',
-  'localhost:3000'
+  'http://localhost:3000'
 ];
 
 module.exports = (req, res, next) => {
