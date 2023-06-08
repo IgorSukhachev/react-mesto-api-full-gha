@@ -48,9 +48,7 @@ const getUserById = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
-  const {
-    name, about, avatar, password, email,
-  } = req.body;
+  const { name, about, avatar, password, email } = req.body;
 
   bcrypt.hash(password, 10).then((hash) => {
     User.create({
@@ -94,8 +92,13 @@ const login = (req, res, next) => {
         // eslint-disable-next-line consistent-return
         .then((matched) => {
           if (matched) {
-            const token = jwt.sign({ _id: user._id }, 'SECRET_KEY', {expiresIn: '7d'});
-            return res.send({ token });
+            const token = jwt.sign({ _id: user._id }, 'SECRET_KEY');
+            res
+              .cookie('jwt', token, {
+                maxAge: lifetime,
+                httpOnly: true,
+              })
+              .send(user.toJSON());
           } else {
             return next(new Unauthorized('Invalid email or password'));
           }
