@@ -98,7 +98,7 @@ const login = (req, res, next) => {
                 maxAge: lifetime,
                 httpOnly: true,
               })
-              .send(user.toJSON());
+              .send({ token });
           } else {
             return next(new Unauthorized('Invalid email or password'));
           }
