@@ -73,7 +73,7 @@ function App() {
 		auth
 			.getContent(token)
 			.then((res) => {
-				setUserEmail(res.data.email)
+				setUserEmail(res.email)
 				setLoggedIn(true)
 				const url = location?.state?.returnUrl || '/'
 				navigate(url)
@@ -165,7 +165,7 @@ function App() {
 	}
 
 	function handleSignout() {
-		localStorage.removeItem('jwt')
+		localStorage.removeItem('token')
 		setLoggedIn(false)
 		navigate('/')
 	}
