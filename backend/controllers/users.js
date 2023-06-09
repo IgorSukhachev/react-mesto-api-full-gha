@@ -92,13 +92,8 @@ const login = (req, res, next) => {
         // eslint-disable-next-line consistent-return
         .then((matched) => {
           if (matched) {
-            const token = jwt.sign({ _id: user._id }, 'SECRET_KEY');
-            res
-              .cookie('jwt', token, {
-                maxAge: lifetime,
-                httpOnly: true,
-              })
-              .send({ token });
+            const token = jwt.sign({ _id: user._id }, 'SECRET_KEY', { expiresIn: '7d' });
+            return res.send({ token })
           } else {
             return next(new Unauthorized('Invalid email or password'));
           }
