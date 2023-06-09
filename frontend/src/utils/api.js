@@ -84,7 +84,7 @@ export default class Api {
 export const api = new Api({
 	baseUrl: 'https://api.mesto-suhachov.nomoredomains.rocks',
 	headers: {
-		authorization: 'deae41f5-41fa-4007-af22-3906d8bef3ad',
+		authorization: `Bearer ${localStorage.getItem('token')}`,
 		'Content-Type': 'application/json',
 	},
 })

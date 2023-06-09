@@ -65,13 +65,13 @@ function App() {
 	}, [isOpen])
 
 	React.useEffect(() => {
-		const jwt = localStorage.getItem('jwt')
-		if (!jwt) {
+		const token = localStorage.getItem('token')
+		if (!token) {
 			return
 		}
 
 		auth
-			.getContent(jwt)
+			.getContent(token)
 			.then((res) => {
 				setUserEmail(res.data.email)
 				setLoggedIn(true)
@@ -155,7 +155,7 @@ function App() {
 			.authorize({ email, password })
 			.then((data) => {
 				if (data.token) {
-					localStorage.setItem('jwt', data.token)
+					localStorage.setItem('token', data.token)
 				}
 				setLoggedIn(true)
 				setUserEmail(email)
