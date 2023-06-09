@@ -5,12 +5,12 @@ const Unauthorized = require('../errors/Unauthorized');
 const authorization = (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
-    next(new Unauthorized('Пользователь не авторизован'));
+    return next(new Unauthorized('Пользователь не авторизован'));
   }
 
   jwt.verify(token, 'SECRET_KEY', (err, payload) => {
     if (err) {
-      next(new Unauthorized('Invalid token'));
+      return next(new Unauthorized('Invalid token'));
     }
     req.user = payload;
     next();
