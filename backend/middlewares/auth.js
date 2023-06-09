@@ -13,7 +13,7 @@ const authorization = (req, res, next) => {
       next(new Unauthorized('Invalid token'));
     }
     req.user = payload;
-    return next();
+    next();
   });
 };
 
