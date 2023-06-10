@@ -5,7 +5,7 @@ const cardRouter = require('./cards');
 const signInRouter = require('./signIn');
 const signUpRouter = require('./signUp');
 
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('../middlewares/logger');
 
 const NotFound = require('../errors/NotFound');
 
