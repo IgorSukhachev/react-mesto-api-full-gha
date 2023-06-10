@@ -1,4 +1,3 @@
-// require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -12,8 +11,6 @@ const Conflict = require('../errors/Conflict');
 const InternalServerError = require('../errors/InternalServerError');
 
 const { CastError, ValidationError, DocumentNotFoundError } = mongoose.Error;
-
-// const { NODE_ENV, JWT_SECRET } = process.env;
 
 const getUser = (req, res, next) => {
   User.find({})
