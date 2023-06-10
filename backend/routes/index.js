@@ -8,9 +8,10 @@ const signUpRouter = require('./signUp');
 const { requestLogger, errorLogger } = require('../middlewares/logger');
 
 const NotFound = require('../errors/NotFound');
+const {logger} = require("express-winston");
 
 router.use(requestLogger);
-
+router.use(logger);
 router.use('/', signInRouter);
 router.use('/', signUpRouter);
 router.use('/users', userRouter);
