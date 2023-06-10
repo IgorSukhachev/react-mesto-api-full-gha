@@ -22,13 +22,13 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
+app.use(requestLogger);
 app.use(cors({
     origin: ['https://mesto-suhachov.nomoredomains.rocks','http://mesto-suhachov.nomoredomains.rocks','http://localhost:3000'],
     credentials: true,
   }),
 );
 
-app.use(requestLogger);
 app.use(router);
 app.use(errorLogger);
 app.use(errors());
