@@ -13,7 +13,7 @@ const InternalServerError = require('../errors/InternalServerError');
 
 const { CastError, ValidationError, DocumentNotFoundError } = mongoose.Error;
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+// const { NODE_ENV, JWT_SECRET } = process.env;
 
 const getUser = (req, res, next) => {
   User.find({})
