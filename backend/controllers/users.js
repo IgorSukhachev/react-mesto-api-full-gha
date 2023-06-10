@@ -10,8 +10,6 @@ const NotFound = require('../errors/NotFound');
 const Conflict = require('../errors/Conflict');
 const InternalServerError = require('../errors/InternalServerError');
 
-const lifetime = 7 * 24 * 60 * 60 * 1000;
-
 const { CastError, ValidationError, DocumentNotFoundError } = mongoose.Error;
 
 const getUser = (req, res, next) => {
@@ -48,7 +46,9 @@ const getUserById = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
-  const { name, about, avatar, password, email } = req.body;
+  const {
+    name, about, avatar, password, email,
+  } = req.body;
 
   bcrypt.hash(password, 10).then((hash) => {
     User.create({
@@ -93,10 +93,9 @@ const login = (req, res, next) => {
         .then((matched) => {
           if (matched) {
             const token = jwt.sign({ _id: user._id }, 'SECRET_KEY', { expiresIn: '7d' });
-            return res.send({ token })
-          } else {
-            return next(new Unauthorized('Invalid email or password'));
+            return res.send({ token });
           }
+          return next(new Unauthorized('Invalid email or password'));
         })
         .catch((err) => next(err));
     })

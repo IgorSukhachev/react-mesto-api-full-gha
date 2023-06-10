@@ -10,10 +10,16 @@ const error = require('./middlewares/error');
 const { PORT = 3000 } = process.env;
 
 const app = express();
-app.use(cors({
-  origin: ['https://mesto-suhachov.nomoredomains.rocks', 'http://mesto-suhachov.nomoredomains.rocks', 'http://localhost:3000'],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: [
+      'https://mesto-suhachov.nomoredomains.rocks',
+      'http://mesto-suhachov.nomoredomains.rocks',
+      'http://localhost:3000',
+    ],
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
