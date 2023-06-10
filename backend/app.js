@@ -15,13 +15,19 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
-app.use(requestLogger);
 
-app.use(cors({
-    origin: ['https://mesto-suhachov.nomoredomains.rocks','http://mesto-suhachov.nomoredomains.rocks','http://localhost:3000'],
+app.use(
+  cors({
+    origin: [
+      'https://mesto-suhachov.nomoredomains.rocks',
+      'http://mesto-suhachov.nomoredomains.rocks',
+      'http://localhost:3000',
+    ],
     credentials: true,
   }),
 );
+
+app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
