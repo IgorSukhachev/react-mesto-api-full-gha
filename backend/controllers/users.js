@@ -1,4 +1,3 @@
-require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -12,8 +11,6 @@ const Conflict = require('../errors/Conflict');
 const InternalServerError = require('../errors/InternalServerError');
 
 const { CastError, ValidationError, DocumentNotFoundError } = mongoose.Error;
-
-const { NODE_ENV, JWT_SECRET } = process.env;
 
 const getUser = (req, res, next) => {
   User.find({})
@@ -95,7 +92,7 @@ const login = (req, res, next) => {
         // eslint-disable-next-line consistent-return
         .then((matched) => {
           if (matched) {
-            const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+            const token = jwt.sign({ _id: user._id }, 'SECRET_KEY', { expiresIn: '7d' });
             return res.send({ token });
           }
           return next(new Unauthorized('Invalid email or password'));
