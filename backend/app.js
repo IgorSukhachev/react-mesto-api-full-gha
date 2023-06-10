@@ -15,19 +15,19 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
+app.use(requestLogger);
+
+app.use(cors({
+    origin: ['https://mesto-suhachov.nomoredomains.rocks','http://mesto-suhachov.nomoredomains.rocks','http://localhost:3000'],
+    credentials: true,
+  }),
+);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-
-app.use(requestLogger);
-app.use(cors({
-    origin: ['https://mesto-suhachov.nomoredomains.rocks','http://mesto-suhachov.nomoredomains.rocks','http://localhost:3000'],
-    credentials: true,
-  }),
-);
 
 app.use(router);
 app.use(errorLogger);
