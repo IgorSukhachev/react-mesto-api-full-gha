@@ -6,7 +6,6 @@ const helmet = require('helmet');
 const cors = require('cors');
 const router = require('./routes');
 const error = require('./middlewares/error');
-const {requestLogger, errorLogger} = require("./middlewares/logger");
 
 const { PORT = 3000 } = process.env;
 
@@ -27,8 +26,6 @@ app.use(
   }),
 );
 
-app.use(requestLogger);
-
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
@@ -36,7 +33,6 @@ app.get('/crash-test', () => {
 });
 
 app.use(router);
-app.use(errorLogger);
 app.use(errors());
 app.use(error);
 
