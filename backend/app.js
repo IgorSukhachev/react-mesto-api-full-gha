@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const router = require('./routes');
 const error = require('./middlewares/error');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+// const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
@@ -16,9 +16,18 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      'https://mesto-suhachov.nomoredomains.rocks',
+      'http://mesto-suhachov.nomoredomains.rocks',
+      'http://localhost:3000',
+    ],
+    credentials: true,
+  }),
+);
 
-app.use(requestLogger);
+// app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -27,7 +36,7 @@ app.get('/crash-test', () => {
 });
 
 app.use(router);
-app.use(errorLogger);
+// app.use(errorLogger);
 app.use(errors());
 app.use(error);
 
