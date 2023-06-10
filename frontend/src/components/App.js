@@ -155,13 +155,17 @@ function App() {
 			.authorize({ email, password })
 			.then((data) => {
 				if (data.token) {
-					localStorage.setItem('token', data.token)
-				}
+          localStorage.setItem('token', data.token);
+        }
 				setLoggedIn(true)
 				setUserEmail(email)
 				navigate('/')
 			})
-			.catch((err) => console.log(err))
+			.catch((err) => {
+				console.log(err)
+				setStatus(false)
+				setInfoToolTip(true)
+			})
 	}
 
 	function handleSignout() {
