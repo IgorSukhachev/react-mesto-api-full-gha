@@ -11,12 +11,6 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 
 const app = express();
-app.use(cors({
-    origin: ['https://mesto-suhachov.nomoredomains.rocks','http://mesto-suhachov.nomoredomains.rocks','http://localhost:3000'],
-    credentials: true,
-  }),
-);
-
 
 app.use(express.json());
 app.use(cookieParser());
@@ -27,6 +21,12 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
+
+app.use(cors({
+    origin: ['https://mesto-suhachov.nomoredomains.rocks','http://mesto-suhachov.nomoredomains.rocks','http://localhost:3000'],
+    credentials: true,
+  }),
+);
 
 app.use(requestLogger);
 app.use(router);
