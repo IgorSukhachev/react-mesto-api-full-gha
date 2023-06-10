@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -95,7 +95,7 @@ const login = (req, res, next) => {
         // eslint-disable-next-line consistent-return
         .then((matched) => {
           if (matched) {
-            const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+            const token = jwt.sign({ _id: user._id }, 'SECRET_KEY', { expiresIn: '7d' });
             return res.send({ token });
           }
           return next(new Unauthorized('Invalid email or password'));
