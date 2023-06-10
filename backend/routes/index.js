@@ -9,7 +9,7 @@ const signUpRouter = require('./signUp');
 
 const NotFound = require('../errors/NotFound');
 
-router.use(requestLogger);
+// router.use(requestLogger);
 
 router.use('/', signInRouter);
 router.use('/', signUpRouter);
@@ -20,6 +20,6 @@ router.use((req, res, next) => {
   next(new NotFound('NOT FOUND'));
 });
 
-router.use(errorLogger);
+// router.use(errorLogger);
 
 module.exports = router;
