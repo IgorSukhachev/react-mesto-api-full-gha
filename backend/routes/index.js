@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('../middlewares/logger');
 
 const userRouter = require('./users');
 const cardRouter = require('./cards');
